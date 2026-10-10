@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeExpense - Manage Your Money</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">🏠</div>
+      <div>
+        <h1>HomeExpense</h1>
+        <p>Manage Your Money</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="active" data-page="dashboard"><span>🏠</span> Dashboard</a>
+      <a data-page="add"><span>⊕</span> Add Expense</a>
+      <a data-page="all"><span>☰</span> All Expenses</a>
+      <a data-page="categories"><span>◈</span> Categories</a>
+      <a data-page="reports"><span>▅</span> Reports</a>
+      <a data-page="settings"><span>⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-quote">
+      <span>🍃</span>
+      <p>Small steps<br>today, big savings<br>tomorrow.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="search-box">🔍 <input type="text" id="searchInput" placeholder="Search expenses..."></div>
+      <div class="topbar-right">
+        <button class="icon-btn">🔔</button>
+        <div class="user"><div class="avatar">HF</div><b>Hassan Farooq</b> <span>▼</span></div>
+      </div>
+    </header>
+
+    <section class="page active" id="page-dashboard">
+      <div class="page-head">
+        <div>
+          <h2>Good Morning, Hassan! 👋</h2>
+          <p>Here's your expense overview for this month.</p>
+        </div>
+        <div class="date-picker">📅</div>
+      </div>
+      <div class="stats">
+        <div class="stat-card income"><div class="stat-icon">💰</div><div><label>Total Income</label><h3>$ 3,000</h3><small class="up">↑ +12% from last month</small></div></div>
+        <div class="stat-card expense"><div class="stat-icon">💳</div><div><label>Total Expenses</label><h3 id="totalExpCard">$ 1,420</h3><small class="down">↑ +5% from last month</small></div></div>
+        <div class="stat-card balance"><div class="stat-icon">🐷</div><div><label>Remaining Balance</label><h3 id="balanceCard">$ 1,580</h3><small class="up">↑ +18% from last month</small></div></div>
+        <div class="stat-card trans"><div class="stat-icon">📊</div><div><label>Total Transactions</label><h3 id="transCard">12</h3><small class="up">↑ +3% from last month</small></div></div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4>Expense Overview</h4>
+          <div class="overview-wrap">
+            <div class="donut-wrap">
+              <div class="donut" id="donutChart"></div>
+              <div class="donut-center"><b id="donutTotal">$1,420</b><span>Total Expenses</span></div>
+            </div>
+            <div class="legend" id="legendList"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h4>Recent Expenses</h4><a>View All</a></div>
+          <div class="recent-list" id="recentList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-add">
+      <div class="page-head"><div><h2>Add Expense</h2><p>Keep track of your spending by adding a new expense.</p></div></div>
+      <div class="card form-card">
+        <label>Amount</label>
+        <div style="display:flex; gap:8px">
+          <div class="input with-icon" style="flex:1"><span id="currencySymbol">$</span><input type="number" id="expAmount" placeholder="0.00"></div>
+          <select id="currencySelect" style="width:130px; padding:10px 12px; border-radius:10px; border:1px solid #e2e8f0; background:#fff; font-size:13px; font-weight:600;">
+            <option value="$">USD - $</option>
+            <option value="Rs">PKR - Rs</option>
+          </select>
+        </div>
+        <label>Category</label>
+        <div class="input"><span>🏷</span><select id="expCategory"><option value="">Select category</option><option>Food & Dining</option><option>Transport</option><option>Utilities</option><option>Shopping</option><option>Entertainment</option><option>Others</option></select></div>
+        <label>Date</label>
+        <div class="input"><span>📅</span><input type="date" id="expDate" value="2025-10-06"></div>
+        <label>Description (optional)</label>
+        <textarea id="expDesc" placeholder="Add a note..."></textarea>
+        <button class="btn-primary" id="saveExpenseBtn">💾 Save Expense</button>
+      </div>
+    </section>
+
+    <section class="page" id="page-all">
+      <div class="page-head"><div><h2>All Expenses</h2><p>View and manage all your expenses.</p></div></div>
+      <div class="card">
+        <div class="filters"><select><option>All Categories</option></select><select><option>This Month</option></select></div>
+        <table class="exp-table"><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th></th></tr></thead><tbody id="allExpensesBody"></tbody></table>
+        <div class="pagination"><button>‹</button><button class="active">1</button><button>2</button><button>›</button><span>Showing 1-7 of 12</span></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-categories"><h2>Categories</h2><p>Coming soon...</p></section>
+    <section class="page" id="page-reports"><h2>Reports</h2><p>Coming soon...</p></section>
+    <section class="page" id="page-settings"><h2>Settings</h2><p>Coming soon...</p></section>
+  </main>
+</div>
+<nav class="mobile-nav">
+  <a class="active"><span>🏠</span>Dashboard</a><a><span>⊕</span>Add</a><a><span>☰</span>All Expenses</a><a><span>⋯</span>More</a>
+</nav>
+<script src="script.js"></script>
+</body>
+</html>
