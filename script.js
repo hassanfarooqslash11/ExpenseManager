@@ -103,3 +103,18 @@ if(currSelect && currSymbol){
   });
   currSymbol.textContent = currSelect.value;
 }
+// Mobile nav fix
+document.querySelectorAll('.mobile-nav a').forEach((a, i)=>{
+  a.addEventListener('click', ()=>{
+    document.querySelectorAll('.mobile-nav a').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+    const pages = ['dashboard','add','all','settings'];
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    const target = document.getElementById('page-'+pages[i]);
+    if(target) target.classList.add('active');
+    // sidebar active bhi update
+    document.querySelectorAll('.nav a').forEach((navA, idx)=> {
+      navA.classList.toggle('active', idx===i);
+    });
+  });
+});
